@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cliente Agregado</title>
+    <link rel="stylesheet" href="https://bootswatch.com/5/slate/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'inicio' %}">
+                <img src="https://i.imgur.com/Uw6oVVt_d.webp?maxwidth=760&fidelity=grand" alt="" width="35px"> Abarrotes "El Angelito"</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'agregar_cliente' %}">Agregar Cliente</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'inicio' %}">Ver Clientes</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card border-success">
+                    <div class="card-header text-center">
+                        <h2>¡Éxito!</h2>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="text-center text-success">Agregado satisfactoriamente</h4>
+                        <div class="d-grid gap-2 mt-4">
+                            <a href="{% url 'inicio' %}" class="btn btn-primary">Regresar al listado</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

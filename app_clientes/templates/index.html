@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Clientes</title>
+    <link rel="stylesheet" href="https://bootswatch.com/5/slate/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 90%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #555 !important;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="https://i.imgur.com/Uw6oVVt_d.webp?maxwidth=760&fidelity=grand" alt="" width="35px"> Abarrotes "El Angelito"</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'agregar_cliente' %}">Agregar Cliente</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'inicio' %}">Ver Clientes</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1 class="text-center">Lista de Clientes</h1>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Teléfono</th>
+                    <th>Dirección</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cliente in clientes %}
+                <tr>
+                    <td>{{ cliente.nombre }}</td>
+                    <td>{{ cliente.apellidos }}</td>
+                    <td>{{ cliente.telefono }}</td>
+                    <td>{{ cliente.direccion }}</td>
+                    <td>
+                        <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#clienteModal{{ cliente.id }}">
+                            <img src="https://i.imgur.com/xrR4Dih.png" alt="" width="35px">
+                        </button>
+                        <a href="{% url 'editar_cliente' cliente.id %}" class="btn btn-outline-info btn-sm"><img src="https://i.imgur.com/3S6C8f8.png" alt="" width="35px"></a>
+                        <a href="{% url 'borrar_cliente' cliente.id %}" class="btn btn-outline-warning btn-sm"><img src="https://i.imgur.com/mACVwQG.png" alt="" width="35px"></a>
+                    </td>
+                </tr>
+
+                <div class="modal fade" id="clienteModal{{ cliente.id }}" tabindex="-1" aria-labelledby="clienteModalLabel{{ cliente.id }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="clienteModalLabel{{ cliente.id }}">Detalles del Cliente</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p><strong>Nombres:</strong> {{ cliente.nombre }}</p>
+                                <p><strong>Apellidos:</strong> {{ cliente.apellidos }}</p>
+                                <p><strong>Teléfono:</strong> {{ cliente.telefono }}</p>
+                                <p><strong>Dirección:</strong> {{ cliente.direccion }}</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center">No hay clientes registrados.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
